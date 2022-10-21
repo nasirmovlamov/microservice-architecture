@@ -1,0 +1,48 @@
+version: 3.0 (12/05/2019)
+
+services:
+  gateway:
+    build:
+      context: ./apps/gateway/
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+  auth:
+    build:
+      context: ./apps/auth-node/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+  # gateway:
+  #   image: node:16
+  #   volumes:
+  #     - ./node:/usr/src/app
+  #   working_dir: /usr/src/app
+  #   command: npm start
+  #   build:
+  #     context: ./apps/auth-node/
+  #     dockerfile: Dockerfile
+  # postgres:
+  #   image: postgres:latest
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - ./databases/auth-postgres/01_auth_tables.sql:/docker-entrypoint-initdb.d/01_auth_tables.sql
+  #     - ./databases/auth-postgres/02_auth_seed.sql:/docker-entrypoint-initdb.d/02_auth_seed.sql
+  #   environment:
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_USER: postgres
+  #   build:
+  #     context: ./databases/auth-postgres
+  #     dockerfile: Dockerfile
+  # redis:
+  #   image: redis:latest
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+  #   command: redis-server /usr/local/etc/redis/redis.conf
+  #   build:
+  #     context: ./databases/auth-redis
+  #     dockerfile: Dockerfile
